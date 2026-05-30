@@ -6,17 +6,16 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:59:26 by jodos-sa                 `----'`         */
-/*   Updated: 2026/05/29 18:03:15 by jodos-sa                                 */
+/*   Updated: 2026/05/30 10:47:47 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <vector>
-#include "Account.hpp"
 
-class Bank {
+struct Bank {
 	public:
-		class Account {
+		struct Account {
 			private:
 				size_t id; // Can't have two identical IDs
 				size_t value;
