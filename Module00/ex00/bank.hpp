@@ -6,27 +6,30 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:59:26 by jodos-sa                 `----'`         */
-/*   Updated: 2026/05/30 10:47:47 by jodos-sa                                 */
+/*   Updated: 2026/06/07 15:52:26 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <vector>
+#include <map>
 
 struct Bank {
 	public:
 		struct Account {
+			friend struct Bank;
+			
 			private:
 				size_t id; // Can't have two identical IDs
 				size_t value;
+				size_t debt;
 			public:
-				const size_t get_value();
-				const size_t get_id();
+				size_t get_value() const;
+				size_t get_id() const;
 		};
 
 	private:
 		size_t liquidity; // 5% percent of inflow money
-		std::vector<Account *> clientAccounts;
+		std::map<int, Account> clientAccounts;
 
 	public:
 		Bank();
@@ -35,7 +38,7 @@ struct Bank {
 		void edit_account(); // I dont know why?
 		void delete_account(); // Create menu asking for what Account to delete
 		void give_loan(); // Can't be > liquidity
-		void deposit_money(); // Menu asking for what Account to deposit money
+		void deposit_money(size_t id); // Menu asking for what Account to deposit money
 		
 		Account operator[](size_t id) const; // Can't use loops
 };
