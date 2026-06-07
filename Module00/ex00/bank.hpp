@@ -6,11 +6,17 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:59:26 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/07 15:52:26 by jodos-sa                                 */
+/*   Updated: 2026/06/07 17:27:34 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
+#ifndef BANK_HPP
+#define BANK_HPP
 
 #include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <string>
+#include <stdlib.h>
 #include <map>
 
 struct Bank {
@@ -25,6 +31,7 @@ struct Bank {
 			public:
 				size_t get_value() const;
 				size_t get_id() const;
+				size_t get_debt() const;
 		};
 
 	private:
@@ -42,3 +49,5 @@ struct Bank {
 		
 		Account operator[](size_t id) const; // Can't use loops
 };
+
+#endif

@@ -25,7 +25,8 @@ SRC_DIR		=	./
 OBJ_DIR		=	./obj/
 
 SRCS		=	main.cpp \
-				bank.cpp
+				bank.cpp \
+				tui.cpp \
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRCS))
 OBJS		=	$(SRCS:.cpp=.o)
@@ -57,6 +58,9 @@ fclean: clean
 	printf "$(_GONE) $(_RED) $(NAME) has been deleted $(_END)\n"
 
 re: fclean all
+
+run: re
+	./Bank
 
 
 .SILENT:

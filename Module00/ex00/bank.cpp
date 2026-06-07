@@ -6,11 +6,14 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/30 11:18:33 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/07 16:00:27 by jodos-sa                                 */
+/*   Updated: 2026/06/07 17:28:54 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "tui.hpp"
 #include "bank.hpp"
+
+const int WIDTH = 36;
 
 Bank::Bank(): liquidity(0){}
 Bank::~Bank(){}
@@ -31,6 +34,8 @@ void Bank::create_account(){
 	account.value = 0;
 	account.debt = 0;
 	this->clientAccounts.insert(std::pair<int, Account>(account.id, account));
+	
+	drawNewAccountHeader(&account);
 }
 
 // void Bank::deposit_money(){
@@ -54,4 +59,8 @@ size_t Bank::Account::get_id() const{
 
 size_t Bank::Account::get_value() const{
 	return value;
+}
+
+size_t Bank::Account::get_debt() const{
+	return debt;
 }
