@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:59:26 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/07 17:27:34 by jodos-sa                                 */
+/*   Updated: 2026/06/12 13:02:16 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef BANK_HPP
@@ -36,7 +36,7 @@ struct Bank {
 
 	private:
 		size_t liquidity; // 5% percent of inflow money
-		std::map<int, Account> clientAccounts;
+		std::map<size_t, Account> clientAccounts;
 
 	public:
 		Bank();
@@ -45,9 +45,9 @@ struct Bank {
 		void edit_account(); // I dont know why?
 		void delete_account(); // Create menu asking for what Account to delete
 		void give_loan(); // Can't be > liquidity
-		void deposit_money(size_t id); // Menu asking for what Account to deposit money
+		void deposit_money(size_t id, size_t amount); // Menu asking for what Account to deposit money
 		
-		Account operator[](size_t id) const; // Can't use loops
+		const Account* operator[](size_t id) const; // Can't use loops
 };
 
 #endif

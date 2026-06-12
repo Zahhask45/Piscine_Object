@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:16:55 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/07 17:30:19 by jodos-sa                                 */
+/*   Updated: 2026/06/12 13:02:21 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,19 @@
 
 #define ENTER	1
 #define CREATE	2
-#define LOAN	3
-#define DELETE	4
+#define DEPOSIT	1
+#define LOAN	2
+#define DELETE	3
 #define EXIT	0
 
 int	main()
 {
 	Bank bank;
-	Bank::Account account;
 
 	int selected = 0;
 	int running = 1;
 	int menu = 0;
+	int id = 0;
 
 	while (running)
 	{
@@ -55,8 +56,12 @@ int	main()
 
 			switch(selected){
 				case ENTER:
-					// TODO: Create menu for ACCOUNT
-					// bank.create_account();
+					// TODO: Create menu for ACCOUNT, LOGIN INTERFACE AND FAIL AND SUCCESSFUL
+					drawLoginHeader();
+					id = drawLoginFooter();
+					if (id == 0)
+						break ;
+					selected = 0;
 					menu = 1;
 					break;
 				case CREATE:
@@ -75,10 +80,10 @@ int	main()
 		
 		else
 		{
-			drawAccountHeader(account);
+			drawAccountHeader(bank[id]);
 			std::cout << "\n";
 
-			drawBody(selected);
+			drawAccountBody(selected);
 
 			std::cout << "\n";
 			drawFooter();
@@ -87,12 +92,14 @@ int	main()
 			std::cin >> selected;
 
 			switch(selected){
-				case ENTER:
+				case DEPOSIT:
 					// TODO: Create menu for ACCOUNT
-					// bank.create_account();
+					bank.deposit_money(bank[id]);
 					break;
-				case CREATE:
+				case LOAN:
 					// TODO: Create an account and go to account menu
+					break;
+				case DELETE:
 					break;
 				case EXIT:
 					menu = 0;

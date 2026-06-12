@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/06/07 17:17:19 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/07 17:25:31 by jodos-sa                                 */
+/*   Updated: 2026/06/12 13:02:18 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void drawBody(int selected)
 	const char* menu[] = {
 		"1 -> Enter Account",
 		"2 -> Create Account",
-		"0 -> Exit"
+		"0 -> Exit",
 	};
 
-	for (int i = 1; i < 3; i++)
+	for (int i = 1; i <= 3; i++)
 	{
-		if (i == selected)
+		if (i == selected && selected != 3)
 			std::cout << " > " << menu[i - 1] << " <\n";
 		else
 			std::cout << "   " << menu[i - 1] << "\n";
@@ -60,6 +60,7 @@ void drawAccountHeader(Bank::Account user)
 	
 	std::cout << "┌──────────────────────────────────────┐\n";
 	std::cout << "│           WELCOME USER BANANA        │\n";
+	std::cout << "├──────────────────────────────────────┤\n";
 	
 	std::ostringstream line1;
 	line1 << "ID: " << user.get_id();
@@ -87,9 +88,9 @@ void drawAccountBody(int selected)
 		"0 -> Exit"
 	};
 
-	for (int i = 1; i < 4; i++)
+	for (int i = 1; i <= 4; i++)
 	{
-		if (i == selected)
+		if (i == selected && selected != 4)
 			std::cout << " > " << menu[i - 1] << " <\n";
 		else
 			std::cout << "   " << menu[i - 1] << "\n";
@@ -102,14 +103,16 @@ void drawFooter()
 	std::cout << "Use numbers to navigate | 0 = exit\n";
 }
 
-void drawNewAccountHeader(Bank::Account *account)
+void drawNewAccountHeader(Bank::Account &account)
 {
+	clearScreen();
+	
 	std::cout << "┌──────────────────────────────────────┐\n";
 	std::cout << "│           BANK SYSTEM BANANA         │\n";
 	std::cout << "├──────────────────────────────────────┤\n";
 	std::cout << "│      HOORAY NEW ACCOUNT CREATED      │\n";
 	std::ostringstream line1;
-	line1 << "ID: " << account->get_id();
+	line1 << "ID: " << account.get_id();
 
 	std::cout << "│ " << std::left << std::setw(WIDTH) << line1.str() << " │\n";
 	std::cout << "└──────────────────────────────────────┘\n";
@@ -117,4 +120,29 @@ void drawNewAccountHeader(Bank::Account *account)
 	std::cout << "\nPress Enter to continue...";
 	std::cin.ignore();
 	std::cin.get();
+}
+
+
+void drawLoginHeader()
+{
+	clearScreen();
+	
+	std::cout << "┌──────────────────────────────────────┐\n";
+	std::cout << "│                 LOGIN                │\n";
+	std::cout << "├──────────────────────────────────────┤\n";
+	std::cout << "│            WHAT IS THE ID?           │\n";
+	std::cout << "└──────────────────────────────────────┘\n";
+}
+
+
+int drawLoginFooter()
+{
+	int id = 0;
+	
+	std::cout << "\n────────────────────────────────────────\n";
+	std::cout << "Use numbers for ID | 0 = exit\n";
+
+	std::cout << "\nID: ";
+	std::cin >> id;
+	return (id);
 }

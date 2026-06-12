@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/30 11:18:33 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/07 17:28:54 by jodos-sa                                 */
+/*   Updated: 2026/06/12 13:02:14 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void Bank::create_account(){
 
 	for (it = this->clientAccounts.begin(); it != this->clientAccounts.end(); it++){
 		if (it->first != id)
-			break ;
+			break ; // 
 		id++;
 	}
 
@@ -38,14 +38,17 @@ void Bank::create_account(){
 	drawNewAccountHeader(&account);
 }
 
-// void Bank::deposit_money(){
-// 	
-// }
+void Bank::deposit_money(Bank::Account &account){
+	account.value = 100;
+}
 
 
 // TODO: Need to check and handle when receiving id 0 or highers than the ones that exist
-Bank::Account Bank::operator[](size_t id) const{
-	return (this->clientAccounts.at(id));
+const Bank::Account* Bank::operator[](size_t id) const{
+	std::map<size_t, Account>::iterator it = clientAccounts.find(id);
+	if (it == clientAccounts.end())
+		return NULL;
+	return &(it->second);
 }
 
 
