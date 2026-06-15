@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/30 11:18:33 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/12 13:02:14 by jodos-sa                                 */
+/*   Updated: 2026/06/15 18:07:24 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,33 @@ Bank::Bank(): liquidity(0){}
 Bank::~Bank(){}
 
 void Bank::create_account(){
-	int id = 1;
+	size_t id = 1;
 	Account account;
 
-	std::map<int, Account>::const_iterator it;
+	std::map<size_t, Account>::const_iterator it;
 
 	for (it = this->clientAccounts.begin(); it != this->clientAccounts.end(); it++){
 		if (it->first != id)
-			break ; // 
+			break ;
 		id++;
 	}
 
 	account.id = id;
 	account.value = 0;
 	account.debt = 0;
-	this->clientAccounts.insert(std::pair<int, Account>(account.id, account));
+	this->clientAccounts.insert(std::pair<size_t, Account>(account.id, account));
 	
 	drawNewAccountHeader(&account);
 }
 
-void Bank::deposit_money(Bank::Account &account){
-	account.value = 100;
+void Bank::deposit_money(size_t id, size_t amount){
+	Account *account = (*this)[id];
+	account->value += amount;
 }
 
 
 // TODO: Need to check and handle when receiving id 0 or highers than the ones that exist
-const Bank::Account* Bank::operator[](size_t id) const{
+Bank::Account* Bank::operator[](size_t id){
 	std::map<size_t, Account>::iterator it = clientAccounts.find(id);
 	if (it == clientAccounts.end())
 		return NULL;

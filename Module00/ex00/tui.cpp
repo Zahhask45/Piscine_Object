@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/06/07 17:17:19 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/12 13:02:18 by jodos-sa                                 */
+/*   Updated: 2026/06/15 18:12:04 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void drawHeader()
 	std::cout << "└──────────────────────────────────────┘\n";
 }
 
-void drawAccountHeader(Bank::Account user)
+void drawAccountHeader(Bank::Account *account)
 {
 	
 	std::cout << "┌──────────────────────────────────────┐\n";
@@ -63,17 +63,17 @@ void drawAccountHeader(Bank::Account user)
 	std::cout << "├──────────────────────────────────────┤\n";
 	
 	std::ostringstream line1;
-	line1 << "ID: " << user.get_id();
+	line1 << "ID: " << account->get_id();
 
 	std::cout << "│ " << std::left << std::setw(WIDTH) << line1.str() << " │\n";
 
 	std::ostringstream line2;
-	line2 << "BALANCE: " << user.get_value();
+	line2 << "BALANCE: " << account->get_value();
 
 	std::cout << "│ " << std::left << std::setw(WIDTH) << line2.str() << " │\n";
 
 	std::ostringstream line3;
-	line3 << "DEBT: " << user.get_debt();
+	line3 << "DEBT: " << account->get_debt();
 
 	std::cout << "│ " << std::left << std::setw(WIDTH) << line3.str() << " │\n";
 	std::cout << "└──────────────────────────────────────┘\n";
@@ -103,7 +103,7 @@ void drawFooter()
 	std::cout << "Use numbers to navigate | 0 = exit\n";
 }
 
-void drawNewAccountHeader(Bank::Account &account)
+void drawNewAccountHeader(Bank::Account *account)
 {
 	clearScreen();
 	
@@ -112,7 +112,7 @@ void drawNewAccountHeader(Bank::Account &account)
 	std::cout << "├──────────────────────────────────────┤\n";
 	std::cout << "│      HOORAY NEW ACCOUNT CREATED      │\n";
 	std::ostringstream line1;
-	line1 << "ID: " << account.get_id();
+	line1 << "ID: " << account->get_id();
 
 	std::cout << "│ " << std::left << std::setw(WIDTH) << line1.str() << " │\n";
 	std::cout << "└──────────────────────────────────────┘\n";

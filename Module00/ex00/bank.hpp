@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:59:26 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/12 13:02:16 by jodos-sa                                 */
+/*   Updated: 2026/06/15 18:06:28 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef BANK_HPP
@@ -47,7 +47,7 @@ struct Bank {
 		void give_loan(); // Can't be > liquidity
 		void deposit_money(size_t id, size_t amount); // Menu asking for what Account to deposit money
 		
-		const Account* operator[](size_t id) const; // Can't use loops
+		Account* operator[](size_t id); // Can't use loops
 };
 
 #endif

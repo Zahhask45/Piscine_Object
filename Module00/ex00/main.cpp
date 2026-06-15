@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:16:55 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/12 13:02:21 by jodos-sa                                 */
+/*   Updated: 2026/06/15 18:07:36 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	main()
 			switch(selected){
 				case DEPOSIT:
 					// TODO: Create menu for ACCOUNT
-					bank.deposit_money(bank[id]);
+					bank.deposit_money(id, 100);
 					break;
 				case LOAN:
 					// TODO: Create an account and go to account menu
