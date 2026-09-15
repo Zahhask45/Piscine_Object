@@ -13,9 +13,7 @@
 #include "tui.hpp"
 #include "bank.hpp"
 
-const int WIDTH = 36;
-
-Bank::Bank(): liquidity(0){}
+Bank::Bank(): liquidity(5000){}
 Bank::~Bank(){}
 
 void Bank::create_account(){
@@ -38,9 +36,13 @@ void Bank::create_account(){
 	drawNewAccountHeader(&account);
 }
 
-void Bank::deposit_money(size_t id, size_t amount){
+void Bank::deposit_money(size_t id){
+	size_t money = 0;
+	drawDepositHeader();
+	money = drawDepositFooter();
 	Account *account = (*this)[id];
-	account->value += amount;
+	account->value += money * 0.95;
+	this->liquidity += money * 0.05;
 }
 
 
@@ -67,4 +69,8 @@ size_t Bank::Account::get_value() const{
 
 size_t Bank::Account::get_debt() const{
 	return debt;
+}
+
+size_t Bank::get_liquidity() const{
+	return liquidity;
 }

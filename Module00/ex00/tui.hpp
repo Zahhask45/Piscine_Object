@@ -25,5 +25,7 @@ void	drawAccountHeader(Bank::Account *account);
 void	drawAccountBody(int selected);
 void	drawNewAccountHeader(Bank::Account *account);
 void	drawFooter();
+void    drawDepositHeader();
+int     drawDepositFooter();
 
 #endif

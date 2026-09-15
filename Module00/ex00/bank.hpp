@@ -45,7 +45,9 @@ struct Bank {
 		void edit_account(); // I dont know why?
 		void delete_account(); // Create menu asking for what Account to delete
 		void give_loan(); // Can't be > liquidity
-		void deposit_money(size_t id, size_t amount); // Menu asking for what Account to deposit money
+		void deposit_money(size_t id); // Menu asking for what Account to deposit money
+
+		size_t get_liquidity() const;
 		
 		Account* operator[](size_t id); // Can't use loops
 };

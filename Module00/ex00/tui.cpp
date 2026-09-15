@@ -146,3 +146,28 @@ int drawLoginFooter()
 	std::cin >> id;
 	return (id);
 }
+
+
+
+void drawDepositHeader()
+{
+	clearScreen();
+	
+	std::cout << "┌──────────────────────────────────────┐\n";
+	std::cout << "│           DEPOSIT USER BANANA        │\n";
+	std::cout << "├──────────────────────────────────────┤\n";
+	std::cout << "│           HOW MUCH TO DEPOSIT        │\n";
+	std::cout << "└──────────────────────────────────────┘\n";
+}
+
+
+int drawDepositFooter()
+{
+	int money = 0;
+	
+	std::cout << "\n────────────────────────────────────────\n";
+	std::cout << "Use numbers for deposit amount | 0 = exit\n";
+	std::cout << "\nMONEY: ";
+	std::cin >> money;
+	return (money);
+}

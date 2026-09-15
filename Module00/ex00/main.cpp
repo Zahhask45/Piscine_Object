@@ -35,7 +35,7 @@ int	main()
 	int selected = 0;
 	int running = 1;
 	int menu = 0;
-	int id = 0;
+	size_t id = 0;
 
 	while (running)
 	{
@@ -49,6 +49,7 @@ int	main()
 			drawBody(selected);
 
 			std::cout << "\n";
+			std::cout << "Bank Money Amount: " << bank.get_liquidity();
 			drawFooter();
 
 			std::cout << "\nSelect option: ";
@@ -74,13 +75,22 @@ int	main()
 					break;		
 			}
 		}
-
-
-
-		
 		else
 		{
-			drawAccountHeader(bank[id]);
+			Bank::Account *account = bank[id];
+			if (account == NULL)
+			{
+				clearScreen();
+				std::cout << "Account ID not found.\n";
+				std::cout << "Press Enter to return to the main menu...";
+				std::cin.ignore();
+				std::cin.get();
+				menu = 0;
+				selected = 0;
+				continue ;
+			}
+
+			drawAccountHeader(account);
 			std::cout << "\n";
 
 			drawAccountBody(selected);
@@ -94,7 +104,7 @@ int	main()
 			switch(selected){
 				case DEPOSIT:
 					// TODO: Create menu for ACCOUNT
-					bank.deposit_money(id, 100);
+					bank.deposit_money(id);
 					break;
 				case LOAN:
 					// TODO: Create an account and go to account menu

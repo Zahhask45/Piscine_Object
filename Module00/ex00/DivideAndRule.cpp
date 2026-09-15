@@ -36,8 +36,10 @@ struct Bank
 	{
 		p_os << "Bank informations : " << std::endl;
 		p_os << "Liquidity : " << p_bank.liquidity << std::endl;
-		for (auto &clientAccount : p_bank.clientAccounts)
-        	p_os << *clientAccount << std::endl;
+		std::vector<Account *>::const_iterator it;
+		for (it = p_bank.clientAccounts.begin();
+			it != p_bank.clientAccounts.end(); ++it)
+			p_os << **it << std::endl;
 		return (p_os);
 	}
 };
