@@ -225,8 +225,4 @@ void drawLoanWarning()
 	std::cout << "├──────────────────────────────────────┤\n";
 	std::cout << "│        WE CAN'T LOAN THAT MUCH       │\n";
 	std::cout << "└──────────────────────────────────────┘\n";
-
-	std::cout << "\nPress Enter to continue...";
-	std::cin.ignore();
-	std::cin.get();
 }

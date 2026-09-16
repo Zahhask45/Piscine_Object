@@ -100,28 +100,34 @@ int	main()
 			std::cout << "\nSelect option: ";
 			readSelection(selected);
 
-			switch(selected){
-				case DEPOSIT:
-					bank.deposit_money(id);
-					break;
+			try
+			{
+				switch(selected){
+					case DEPOSIT:
+						bank.deposit_money(id);
+						selected = DEPOSIT;
+						break;
 					case LOAN:
-					bank.give_loan(id);
-					break;
-				case DELETE:
-					try{
+						bank.give_loan(id);
+						selected = LOAN;
+						break;
+					case DELETE:
 						bank.delete_account(id);
+						selected = ENTER;
 						menu = 0;
-						selected = 0;
-					}
-					catch {
-						std::cout << "Error: " << error.what() << std::endl;
-						std::cout << "Press Enter to continue...";
-						std::cin.ignore();
-						std::cin.get()
-					}
-				case EXIT:
-					menu = 0;
-					break;		
+						break;
+					case EXIT:
+						selected = ENTER;
+						menu = 0;
+						break;
+				}
+			}
+			catch (const std::exception& error)
+			{
+				std::cout << "Error: " << error.what() << std::endl;
+				std::cout << "Press Enter to continue...";
+				std::cin.ignore();
+				std::cin.get();
 			}
 		}
 	}

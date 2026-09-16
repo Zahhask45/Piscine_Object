@@ -20,7 +20,7 @@ Bank::~Bank(){}
 void Bank::delete_account(size_t id){
 	std::map<size_t, Account>::iterator it = clientAccounts.find(id);
 	if (it == clientAccounts.end())
-		return ;
+		throw std::runtime_error("Account does not exist");
 	if (it->second.value > 0)
 		this->liquidity += it->second.value;
 	clientAccounts.erase(it);
@@ -51,11 +51,12 @@ void Bank::give_loan(size_t id){
 	drawLoanHeader();
 	loan = drawLoanFooter(this);
 	if (loan > this->liquidity){
-		loan = 0;
 		drawLoanWarning();
-		return ;
+		throw std::runtime_error("Loan exceeds the bank's liquidity");
 	}
 	Account *account = (*this)[id];
+	if (account == NULL)
+		throw std::runtime_error("Account does not exist");
 	account->value += loan;
 	account->debt += loan;
 	this->liquidity -= loan;
@@ -66,6 +67,8 @@ void Bank::deposit_money(size_t id){
 	drawDepositHeader();
 	money = drawDepositFooter();
 	Account *account = (*this)[id];
+	if (account == NULL)
+		throw std::runtime_error("Account does not exist");
 	if (account->debt) {
 		account->debt -= money;
 		this->liquidity += money;
