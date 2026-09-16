@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                                            */
-/*   bank.hpp                                                   _             */
+/*   DivideAndRule.hpp                                          _             */
 /*                                                            _ \'-_,#        */
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:59:26 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/15 18:06:28 by jodos-sa                                 */
+/*   Updated: 2026/09/16 13:22:42 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef BANK_HPP
-#define BANK_HPP
+#ifndef DIVIDEANDRULE_HPP
+#define DIVIDEANDRULE_HPP
 
 #include <iostream>
 #include <iomanip>

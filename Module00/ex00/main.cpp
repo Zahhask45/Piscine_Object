@@ -6,11 +6,11 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:16:55 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/15 18:07:36 by jodos-sa                                 */
+/*   Updated: 2026/09/16 13:23:11 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bank.hpp"
+#include "DivideAndRule.hpp"
 #include "tui.hpp"
 
 #define END		"\033[0m"

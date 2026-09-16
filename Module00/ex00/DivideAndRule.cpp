@@ -1,75 +1,109 @@
-#include <iostream>
-#include <vector>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                                            */
+/*   DivideAndRule.cpp                                          _             */
+/*                                                            _ \'-_,#        */
+/*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
+/*                                                           \`---`  /        */
+/*   Created: 2026/05/30 11:18:33 by jodos-sa                 `----'`         */
+/*   Updated: 2026/09/16 13:22:28 by jodos-sa                                 */
+/*                                                                            */
+/* ************************************************************************** */
 
-struct Account
-{
-	int id;
-	int value;
+#include "DivideAndRule.hpp"
+#include "tui.hpp"
 
 
-	Account() :
-		id(-1),
-		value(0)
-	{
+Bank::Bank(): liquidity(5000){}
+Bank::~Bank(){}
+
+void Bank::delete_account(size_t id){
+	std::map<size_t, Account>::iterator it = clientAccounts.find(id);
+	if (it == clientAccounts.end())
+		throw std::runtime_error("Account does not exist");
+	if (it->second.value > 0)
+		this->liquidity += it->second.value;
+	clientAccounts.erase(it);
+}
+
+void Bank::create_account(){
+	size_t id = 1;
+	Account account;
+
+	std::map<size_t, Account>::const_iterator it;
+
+	for (it = this->clientAccounts.begin(); it != this->clientAccounts.end(); it++){
+		if (it->first != id)
+			break ;
+		id++;
+	}
+
+	account.id = id;
+	account.value = 0;
+	account.debt = 0;
+	this->clientAccounts.insert(std::pair<size_t, Account>(account.id, account));
 	
+	drawNewAccountHeader(&account);
+}
+
+void Bank::give_loan(size_t id){
+	size_t loan = 0;
+	drawLoanHeader();
+	loan = drawLoanFooter(this);
+	if (loan > this->liquidity){
+		drawLoanWarning();
+		throw std::runtime_error("Loan exceeds the bank's liquidity");
 	}
+	Account *account = (*this)[id];
+	if (account == NULL)
+		throw std::runtime_error("Account does not exist");
+	account->value += loan;
+	account->debt += loan;
+	this->liquidity -= loan;
+}
 
-	friend std::ostream& operator << (std::ostream& p_os, const Account& p_account)
-	{
-		p_os << "[" << p_account.id << "] - [" << p_account.value << "]";
-		return (p_os);
+void Bank::deposit_money(size_t id){
+	size_t money = 0;
+	drawDepositHeader();
+	money = drawDepositFooter();
+	Account *account = (*this)[id];
+	if (account == NULL)
+		throw std::runtime_error("Account does not exist");
+	if (account->debt) {
+		account->debt -= money;
+		this->liquidity += money;
+		return ;
 	}
-};
+	account->value += money * 0.95;
+	this->liquidity += money * 0.05;
+}
 
-struct Bank
-{
-	int liquidity;
-	std::vector<Account *> clientAccounts;
 
-	Bank() :
-		liquidity(0)
-	{
+// TODO: Need to check and handle when receiving id 0 or highers than the ones that exist
+Bank::Account* Bank::operator[](size_t id){
+	std::map<size_t, Account>::iterator it = clientAccounts.find(id);
+	if (it == clientAccounts.end())
+		return NULL;
+	return &(it->second);
+}
 
-	}
 
-	friend std::ostream& operator << (std::ostream& p_os, const Bank& p_bank)
-	{
-		p_os << "Bank informations : " << std::endl;
-		p_os << "Liquidity : " << p_bank.liquidity << std::endl;
-		std::vector<Account *>::const_iterator it;
-		for (it = p_bank.clientAccounts.begin();
-			it != p_bank.clientAccounts.end(); ++it)
-			p_os << **it << std::endl;
-		return (p_os);
-	}
-};
 
-int main()
-{
-	Account accountA = Account();
-	accountA.id = 0;
-	accountA.value = 100;
+// =====================================
+//				ACCOUNT
 
-	Account accountB = Account();
-	accountB.id = 1;
-	accountB.value = 100;
+size_t Bank::Account::get_id() const{
+	return id;
+}
 
-	Bank bank = Bank();
-	bank.liquidity = 999;
-	bank.clientAccounts.push_back(&accountA);
-	bank.clientAccounts.push_back(&accountB);
+size_t Bank::Account::get_value() const{
+	return value;
+}
 
-	bank.liquidity -= 200;
-	accountA.value += 400;
+size_t Bank::Account::get_debt() const{
+	return debt;
+}
 
-	std::cout << "Account : " << std::endl;
-	std::cout << accountA << std::endl;
-	std::cout << accountB << std::endl;
-
-	std::cout << " ----- " << std::endl;
-
-	std::cout << "Bank : " << std::endl;
-	std::cout << bank << std::endl;
-
-	return (0);
+size_t Bank::get_liquidity() const{
+	return liquidity;
 }

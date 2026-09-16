@@ -19,13 +19,13 @@ _GONE		=	\e[2K\r
 CXX			=	c++
 CXXFLAGS	=	-Wall -Werror -Wextra -pedantic -std=c++98 -g
 
-NAME		=	Bank
+NAME		=	DivideAndRule
 
 SRC_DIR		=	./
 OBJ_DIR		=	./obj/
 
 SRCS		=	main.cpp \
-				bank.cpp \
+				DivideAndRule.cpp \
 				tui.cpp \
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRCS))

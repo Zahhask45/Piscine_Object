@@ -6,13 +6,13 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/06/07 17:20:17 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/15 18:11:49 by jodos-sa                                 */
+/*   Updated: 2026/09/16 13:23:33 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef TUI_HPP
 #define TUI_HPP
 
-#include "bank.hpp"
+#include "DivideAndRule.hpp"
 
 struct Bank;
 
