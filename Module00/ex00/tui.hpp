@@ -16,16 +16,21 @@
 
 struct Bank;
 
+void	readOption(size_t &value);
+void	readSelection(size_t &selected);
 void	clearScreen();
 void	drawHeader();
 void	drawBody(int selected);
 void	drawLoginHeader();
-int		drawLoginFooter();
+size_t	drawLoginFooter();
 void	drawAccountHeader(Bank::Account *account);
 void	drawAccountBody(int selected);
 void	drawNewAccountHeader(Bank::Account *account);
 void	drawFooter();
-void    drawDepositHeader();
-int     drawDepositFooter();
+void	drawDepositHeader();
+size_t 	drawDepositFooter();
+void	drawLoanHeader();
+size_t 	drawLoanFooter(Bank *bank);
+void	drawLoanWarning();
 
 #endif

@@ -13,8 +13,18 @@
 #include "tui.hpp"
 #include "bank.hpp"
 
+
 Bank::Bank(): liquidity(5000){}
 Bank::~Bank(){}
+
+void Bank::delete_account(size_t id){
+	std::map<size_t, Account>::iterator it = clientAccounts.find(id);
+	if (it == clientAccounts.end())
+		return ;
+	if (it->second.value > 0)
+		this->liquidity += it->second.value;
+	clientAccounts.erase(it);
+}
 
 void Bank::create_account(){
 	size_t id = 1;
@@ -36,11 +46,31 @@ void Bank::create_account(){
 	drawNewAccountHeader(&account);
 }
 
+void Bank::give_loan(size_t id){
+	size_t loan = 0;
+	drawLoanHeader();
+	loan = drawLoanFooter(this);
+	if (loan > this->liquidity){
+		loan = 0;
+		drawLoanWarning();
+		return ;
+	}
+	Account *account = (*this)[id];
+	account->value += loan;
+	account->debt += loan;
+	this->liquidity -= loan;
+}
+
 void Bank::deposit_money(size_t id){
 	size_t money = 0;
 	drawDepositHeader();
 	money = drawDepositFooter();
 	Account *account = (*this)[id];
+	if (account->debt) {
+		account->debt -= money;
+		this->liquidity += money;
+		return ;
+	}
 	account->value += money * 0.95;
 	this->liquidity += money * 0.05;
 }

@@ -32,7 +32,7 @@ int	main()
 {
 	Bank bank;
 
-	int selected = 0;
+	size_t selected = 0;
 	int running = 1;
 	int menu = 0;
 	size_t id = 0;
@@ -53,8 +53,7 @@ int	main()
 			drawFooter();
 
 			std::cout << "\nSelect option: ";
-			std::cin >> selected;
-
+			readSelection(selected);
 			switch(selected){
 				case ENTER:
 					// TODO: Create menu for ACCOUNT, LOGIN INTERFACE AND FAIL AND SUCCESSFUL
@@ -99,18 +98,27 @@ int	main()
 			drawFooter();
 
 			std::cout << "\nSelect option: ";
-			std::cin >> selected;
+			readSelection(selected);
 
 			switch(selected){
 				case DEPOSIT:
-					// TODO: Create menu for ACCOUNT
 					bank.deposit_money(id);
 					break;
-				case LOAN:
-					// TODO: Create an account and go to account menu
+					case LOAN:
+					bank.give_loan(id);
 					break;
 				case DELETE:
-					break;
+					try{
+						bank.delete_account(id);
+						menu = 0;
+						selected = 0;
+					}
+					catch {
+						std::cout << "Error: " << error.what() << std::endl;
+						std::cout << "Press Enter to continue...";
+						std::cin.ignore();
+						std::cin.get()
+					}
 				case EXIT:
 					menu = 0;
 					break;		

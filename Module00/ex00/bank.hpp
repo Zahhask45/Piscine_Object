@@ -18,6 +18,7 @@
 #include <string>
 #include <stdlib.h>
 #include <map>
+#include <stdexcept>
 
 struct Bank {
 	public:
@@ -43,8 +44,8 @@ struct Bank {
 		~Bank();
 		void create_account();
 		void edit_account(); // I dont know why?
-		void delete_account(); // Create menu asking for what Account to delete
-		void give_loan(); // Can't be > liquidity
+		void delete_account(size_t); // Create menu asking for what Account to delete
+		void give_loan(size_t id); // Can't be > liquidity
 		void deposit_money(size_t id); // Menu asking for what Account to deposit money
 
 		size_t get_liquidity() const;

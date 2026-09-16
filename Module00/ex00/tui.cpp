@@ -29,6 +29,27 @@ void clearScreen()
 #endif
 }
 
+void readOption(size_t &value)
+{
+	if (std::cin >> value)
+		return ;
+	clearScreen();
+	std::cout << "Trying to be funny\n" << "OUT" << std::endl;
+	std::cin.clear();
+	std::cin.ignore(10000, '\n');
+	std::cin.get();
+	value = 0;
+}
+
+void readSelection(size_t &value)
+{
+	if (std::cin >> value)
+		return ;
+	std::cin.clear();
+	std::cin.ignore(10000, '\n');
+	value = 999999;
+}
+
 
 void drawBody(int selected)
 {
@@ -135,15 +156,15 @@ void drawLoginHeader()
 }
 
 
-int drawLoginFooter()
+size_t drawLoginFooter()
 {
-	int id = 0;
+	size_t id = 0;
 	
 	std::cout << "\n────────────────────────────────────────\n";
 	std::cout << "Use numbers for ID | 0 = exit\n";
 
 	std::cout << "\nID: ";
-	std::cin >> id;
+	readOption(id);
 	return (id);
 }
 
@@ -161,13 +182,51 @@ void drawDepositHeader()
 }
 
 
-int drawDepositFooter()
+size_t drawDepositFooter()
 {
-	int money = 0;
+	size_t money = 0;
 	
 	std::cout << "\n────────────────────────────────────────\n";
 	std::cout << "Use numbers for deposit amount | 0 = exit\n";
 	std::cout << "\nMONEY: ";
-	std::cin >> money;
+	readOption(money);
 	return (money);
+}
+
+void drawLoanHeader()
+{
+	clearScreen();
+	
+	std::cout << "┌──────────────────────────────────────┐\n";
+	std::cout << "│           LOAN USER BANANA           │\n";
+	std::cout << "├──────────────────────────────────────┤\n";
+	std::cout << "│       HOW MUCH TO ASK FOR LOAN       │\n";
+	std::cout << "└──────────────────────────────────────┘\n";
+}
+
+size_t drawLoanFooter(Bank *bank)
+{
+	size_t loan = 0;
+	
+	std::cout << "Bank Money Amount: " << bank->get_liquidity();
+	std::cout << "\n────────────────────────────────────────\n";
+	std::cout << "Use numbers for loan amount | 0 = exit\n";
+	std::cout << "\nLOAN: ";
+	readOption(loan);
+	return (loan);
+}
+
+void drawLoanWarning()
+{
+	clearScreen();
+	
+	std::cout << "┌──────────────────────────────────────┐\n";
+	std::cout << "│            WARNING BANANA            │\n";
+	std::cout << "├──────────────────────────────────────┤\n";
+	std::cout << "│        WE CAN'T LOAN THAT MUCH       │\n";
+	std::cout << "└──────────────────────────────────────┘\n";
+
+	std::cout << "\nPress Enter to continue...";
+	std::cin.ignore();
+	std::cin.get();
 }
