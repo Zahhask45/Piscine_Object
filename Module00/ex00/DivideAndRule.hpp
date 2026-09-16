@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:59:26 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/16 13:22:42 by jodos-sa                                 */
+/*   Updated: 2026/09/16 17:27:42 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef DIVIDEANDRULE_HPP
@@ -43,10 +43,11 @@ struct Bank {
 		Bank();
 		~Bank();
 		void create_account();
-		void edit_account(); // I dont know why?
-		void delete_account(size_t); // Create menu asking for what Account to delete
+		void delete_account(size_t);
 		void give_loan(size_t id); // Can't be > liquidity
-		void deposit_money(size_t id); // Menu asking for what Account to deposit money
+		void pay_loan(size_t id);
+		void deposit_money(size_t id);
+		void withdraw_money(size_t id);
 
 		size_t get_liquidity() const;
 		

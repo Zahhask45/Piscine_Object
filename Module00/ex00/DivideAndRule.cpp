@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/30 11:18:33 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/16 13:22:28 by jodos-sa                                 */
+/*   Updated: 2026/09/16 17:58:00 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,46 @@ void Bank::give_loan(size_t id){
 	this->liquidity -= loan;
 }
 
+void Bank::pay_loan(size_t id){
+	size_t amount = 0;
+	
+	Account *account = (*this)[id];
+	if (account == NULL)
+		throw std::runtime_error("Account does not exist");
+	
+	if (account->debt > 0){
+		if (account->value == 0){
+			drawSharkLoanerHeader();
+			amount = 999999;
+			account->debt += amount;
+			drawSharkLoanerFooter(amount);
+			throw std::runtime_error("No money to pay loan");
+		}
+		drawSharkHeader();
+		
+		if (account->debt >= account->value){
+			amount = account->value;
+			account->debt -= amount;
+		}
+		else if (account->debt < account->value){
+			amount = account->debt;
+			account->debt -= amount;
+		}
+		drawSharkFooter(amount);
+		std::cout << "Press Enter to continue...";
+		std::cin.ignore();
+		std::cin.get();
+	}
+	else{
+		drawDonationHeader();
+		amount = 4545;
+		account->debt += amount;
+		drawDonationFooter(amount);
+		throw std::runtime_error("No debt to pay");
+	}
+
+}
+
 void Bank::deposit_money(size_t id){
 	size_t money = 0;
 	drawDepositHeader();
@@ -69,13 +109,22 @@ void Bank::deposit_money(size_t id){
 	Account *account = (*this)[id];
 	if (account == NULL)
 		throw std::runtime_error("Account does not exist");
-	if (account->debt) {
-		account->debt -= money;
-		this->liquidity += money;
-		return ;
-	}
 	account->value += money * 0.95;
 	this->liquidity += money * 0.05;
+}
+
+void Bank::withdraw_money(size_t id){
+	size_t money = 0;
+	drawWithdrawHeader();
+	money = drawWithdrawFooter();
+	Account *account = (*this)[id];
+	if (account == NULL)
+		throw std::runtime_error("Account does not exist");
+	if (money > account->value){
+		clearScreen();
+		throw std::runtime_error("No you can not\n You don\'t have that much money");
+	}
+	account->value -= money;
 }
 
 

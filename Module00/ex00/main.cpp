@@ -6,27 +6,31 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:16:55 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/16 13:23:11 by jodos-sa                                 */
+/*   Updated: 2026/09/16 17:44:47 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DivideAndRule.hpp"
 #include "tui.hpp"
 
-#define END		"\033[0m"
-#define RED		"\033[31m"
-#define GREEN	"\033[32m"
-#define YELLOW	"\033[33m"
-#define BLUE	"\033[34m"
-#define MAGENTA	"\033[35m"
-#define CYAN	"\033[36m"
+#define END			"\033[0m"
+#define RED			"\033[31m"
+#define GREEN		"\033[32m"
+#define YELLOW		"\033[33m"
+#define BLUE		"\033[34m"
+#define MAGENTA		"\033[35m"
+#define CYAN		"\033[36m"
 
-#define ENTER	1
-#define CREATE	2
-#define DEPOSIT	1
-#define LOAN	2
-#define DELETE	3
-#define EXIT	0
+#define ENTER		1
+#define CREATE		2
+
+#define DEPOSIT		1
+#define WITHDRAW	2
+#define LOAN		3
+#define PAY_LOAN	4
+#define DELETE		5
+
+#define EXIT		0
 
 int	main()
 {
@@ -107,9 +111,17 @@ int	main()
 						bank.deposit_money(id);
 						selected = DEPOSIT;
 						break;
+					case WITHDRAW:
+						bank.withdraw_money(id);
+						selected = WITHDRAW;
+						break;
 					case LOAN:
 						bank.give_loan(id);
 						selected = LOAN;
+						break;
+					case PAY_LOAN:
+						bank.pay_loan(id);
+						selected = PAY_LOAN;
 						break;
 					case DELETE:
 						bank.delete_account(id);

@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/06/07 17:17:19 by jodos-sa                 `----'`         */
-/*   Updated: 2026/06/15 18:12:04 by jodos-sa                                 */
+/*   Updated: 2026/09/16 17:55:13 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,16 @@ void drawAccountBody(int selected)
 {
 	const char* menu[] = {
 		"1 -> Deposit Money",
-		"2 -> Ask for Loan",
-		"3 -> Delete Account",
+		"2 -> Withdraw Money",
+		"3 -> Ask for Loan",
+		"4 -> Pay the Loan",
+		"5 -> Delete Account",
 		"0 -> Exit"
 	};
 
-	for (int i = 1; i <= 4; i++)
+	for (int i = 1; i <= 6; i++)
 	{
-		if (i == selected && selected != 4)
+		if (i == selected && selected != 6)
 			std::cout << " > " << menu[i - 1] << " <\n";
 		else
 			std::cout << "   " << menu[i - 1] << "\n";
@@ -193,6 +195,29 @@ size_t drawDepositFooter()
 	return (money);
 }
 
+void drawWithdrawHeader()
+{
+	clearScreen();
+	
+	std::cout << "┌──────────────────────────────────────┐\n";
+	std::cout << "│          WITHDRAW USER BANANA        │\n";
+	std::cout << "├──────────────────────────────────────┤\n";
+	std::cout << "│          HOW MUCH TO WITHDRAW        │\n";
+	std::cout << "└──────────────────────────────────────┘\n";
+}
+
+
+size_t drawWithdrawFooter()
+{
+	size_t money = 0;
+	
+	std::cout << "\n────────────────────────────────────────\n";
+	std::cout << "Use numbers for withdraw amount | 0 = exit\n";
+	std::cout << "\nMONEY: ";
+	readOption(money);
+	return (money);
+}
+
 void drawLoanHeader()
 {
 	clearScreen();
@@ -225,4 +250,66 @@ void drawLoanWarning()
 	std::cout << "├──────────────────────────────────────┤\n";
 	std::cout << "│        WE CAN'T LOAN THAT MUCH       │\n";
 	std::cout << "└──────────────────────────────────────┘\n";
+}
+
+void drawSharkHeader()
+{
+	clearScreen();
+	
+	std::cout << "┌──────────────────────────────────────┐\n";
+	std::cout << "│             SHARK BANANA             │\n";
+	std::cout << "├──────────────────────────────────────┤\n";
+	std::cout << "│        WE DONT ASK FOR AMOUNT        │\n";
+	std::cout << "└──────────────────────────────────────┘\n";
+}
+
+void drawSharkFooter(size_t amount)
+{
+	
+	std::cout << "\nAmount Paid: " << amount;
+	std::cout << "\n────────────────────────────────────────\n";
+}
+
+void drawSharkLoanerHeader()
+{
+	clearScreen();
+	
+	std::cout << "┌──────────────────────────────────────┐\n";
+	std::cout << "│             SHARK BANANA             │\n";
+	std::cout << "├──────────────────────────────────────┤\n";
+	std::cout << "│        ARE YOU TRYING TO PAY         │\n";
+	std::cout << "│            WITHOUT MONEY?            │\n";
+	std::cout << "├──────────────────────────────────────┤\n";
+	std::cout << "│          DEBT IS HIGHER NOW          │\n";
+	std::cout << "└──────────────────────────────────────┘\n";
+}
+
+void drawSharkLoanerFooter(size_t amount)
+{
+	
+	std::cout << "\nAmount Added: " << amount;
+	std::cout << "\n────────────────────────────────────────\n";
+}
+
+void drawDonationHeader()
+{
+	clearScreen();
+	
+	std::cout << "┌──────────────────────────────────────┐\n";
+	std::cout << "│             SHARK BANANA             │\n";
+	std::cout << "├──────────────────────────────────────┤\n";
+	std::cout << "│        ARE YOU TRYING TO PAY         │\n";
+	std::cout << "│           INEXISTENT DEBT?           │\n";
+	std::cout << "├──────────────────────────────────────┤\n";
+	std::cout << "│          DEBT IS HIGHER NOW          │\n";
+	std::cout << "└──────────────────────────────────────┘\n";
+}
+
+
+
+void drawDonationFooter(size_t amount)
+{
+	
+	std::cout << "\nAmount Added: " << amount;
+	std::cout << "\n────────────────────────────────────────\n";
 }
