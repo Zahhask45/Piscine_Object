@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/30 11:18:33 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/16 17:58:00 by jodos-sa                                 */
+/*   Updated: 2026/09/16 18:16:51 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void Bank::pay_loan(size_t id){
 			amount = account->debt;
 			account->debt -= amount;
 		}
+		this->liquidity += amount;
 		drawSharkFooter(amount);
 		std::cout << "Press Enter to continue...";
 		std::cin.ignore();
