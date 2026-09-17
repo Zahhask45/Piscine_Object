@@ -5,8 +5,8 @@
 /*                                                            _ \'-_,#        */
 /*   By: jodos-sa <jodos-sa@student.42porto.com>             _\'--','`|       */
 /*                                                           \`---`  /        */
-/*   Created: 2026/09/17 16:24:29 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/17 16:29:29 by jodos-sa                                 */
+/*   Created: 2026/09/17 16:52:07 by jodos-sa                 `----'`         */
+/*   Updated: 2026/09/17 16:52:23 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ int	main()
 	size_t option = 1;
 	Graph graph(Vector2(11.0f, 11.0f));
 	
+	graph.display();
 	while (option){
-		clearScreen();
-		graph.display();
-
 		readSelection(option);
 		if (option == 1){
 			float x = 0;
@@ -57,6 +55,7 @@ int	main()
 
 			readFloat(x);
 			readFloat(y);
+			clearScreen();
 			graph.addPoint(Vector2(x, y));
 		}
 	}

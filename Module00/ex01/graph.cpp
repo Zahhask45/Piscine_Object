@@ -5,7 +5,7 @@
 /*                                                            _ \'-_,#        */
 /*   By: jodos-sa <jodos-sa@student.42porto.com>             _\'--','`|       */
 /*                                                           \`---`  /        */
-/*   Created: 2026/09/17 13:38:33 by jodos-sa                 `----'`         */
+/*   Created: 2026/09/17 13:38:33 by jodos-sa                 `----'         */
 /*   Updated: 2026/09/17 16:25:19 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
@@ -25,7 +25,8 @@ bool Graph::addPoint(const Vector2& point){
 	if (!isInside(point))
 		return false; 
 
-	this->points.push_back(point);	
+	this->points.push_back(point);
+	display();
 	return true;
 }
 
