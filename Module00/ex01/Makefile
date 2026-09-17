@@ -19,14 +19,14 @@ _GONE		=	\e[2K\r
 CXX			=	c++
 CXXFLAGS	=	-Wall -Werror -Wextra -pedantic -std=c++98 -g
 
-NAME		=	DivideAndRule
+NAME		=	Graph
 
 SRC_DIR		=	./
 OBJ_DIR		=	./obj/
 
 SRCS		=	main.cpp \
-				DivideAndRule.cpp \
-				tui.cpp \
+				graph.cpp \
+				vector2.cpp \
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRCS))
 OBJS		=	$(SRCS:.cpp=.o)
@@ -60,7 +60,7 @@ fclean: clean
 re: fclean all
 
 run: re
-	./DivideAndRule
+	./Graph
 
 
 .SILENT:

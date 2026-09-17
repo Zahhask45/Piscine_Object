@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:59:26 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/16 18:02:41 by jodos-sa                                 */
+/*   Updated: 2026/09/17 16:20:55 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef DIVIDEANDRULE_HPP
@@ -16,7 +16,7 @@
 #include <iomanip>
 #include <sstream>
 #include <string>
-#include <stdlib.h>
+#include <cstdlib>
 #include <map>
 #include <stdexcept>
 
