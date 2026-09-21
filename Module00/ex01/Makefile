@@ -19,6 +19,8 @@ _GONE		=	\e[2K\r
 CXX			=	c++
 CXXFLAGS	=	-Wall -Werror -Wextra -pedantic -std=c++98 -g
 
+LDFLAGS		= -lpng
+
 NAME		=	Graph
 
 SRC_DIR		=	./
@@ -37,7 +39,7 @@ all:	$(NAME)
 
 $(NAME): $(OBJ)
 	printf "$(_GONE) $(_GREEN) All files compiled into $(OBJ_DIR) $(_END)\n"
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ) $(LDFLAGS)
 	printf "$(_GONE) $(_GREEN) Executable $(NAME) created $(_END)\n"
 
 $(OBJ): | $(OBJ_DIR)

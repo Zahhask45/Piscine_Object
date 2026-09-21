@@ -6,12 +6,15 @@
 /*   By: jodos-sa <jodos-sa@student.42porto.com>             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/09/17 16:52:07 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/17 16:52:23 by jodos-sa                                 */
+/*   Updated: 2026/09/21 14:41:15 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <cstdlib>
+#include <iostream>
+#include <stdexcept>
+#include <png.h>
 #include "graph.hpp"
 
 void readSelection(size_t &value)
@@ -43,28 +46,18 @@ void clearScreen()
 
 int	main()
 {
-	size_t option = 1;
-	Graph graph(Vector2(11.0f, 11.0f));
-	
-	graph.display();
-	while (option){
-		readSelection(option);
-		if (option == 1){
-			float x = 0;
-			float y = 0;
+	Graph graph(Vector2(20.0f, 20.0f));
 
-			readFloat(x);
-			readFloat(y);
-			clearScreen();
-			graph.addPoint(Vector2(x, y));
-		}
+	try{
+		graph.loadPoints("points.txt");
+		graph.addPoint(Vector2(8.0f, 8.0f));
+		graph.display();
+		generatePNG(graph, "graph.png");
+		std::cout << "Graph saved to graph.png" << std::endl;
 	}
-
-	
-// 
-// 	graph.addPoint(Vector2(0.0f, 0.0f));
-// 	graph.addPoint(Vector2(2.0f, 2.0f));
-// 	graph.addPoint(Vector2(4.0f, 2.0f));
-// 	graph.addPoint(Vector2(2.0f, 4.0f));
+	catch (const std::exception& error){
+		std::cerr << "Error: " << error.what() << std::endl;
+		return (1);
+	}
 	return (0);
 }
