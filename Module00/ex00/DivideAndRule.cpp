@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/30 11:18:33 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/17 11:50:55 by jodos-sa                                 */
+/*   Updated: 2026/09/21 19:02:40 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void Bank::delete_account(size_t id){
 	std::map<size_t, Account>::iterator it = clientAccounts.find(id);
 	if (it == clientAccounts.end())
 		throw std::runtime_error("Account does not exist");
+	if (it->second.debt > 0)
+		throw std::runtime_error("Can't delete account, account has debt");
 	if (it->second.value > 0)
 		this->liquidity += it->second.value;
 	clientAccounts.erase(it);
@@ -46,10 +48,10 @@ void Bank::create_account(){
 	drawNewAccountHeader(&account);
 }
 
-void Bank::give_loan(size_t id){
-	size_t loan = 0;
-	drawLoanHeader();
-	loan = drawLoanFooter(this);
+void Bank::give_loan(size_t id, size_t loan){
+	// size_t loan = 0;
+	// drawLoanHeader();
+	// loan = drawLoanFooter(this);
 	if (loan > this->liquidity){
 		drawLoanWarning();
 		throw std::runtime_error("Loan exceeds the bank's liquidity");
@@ -62,13 +64,14 @@ void Bank::give_loan(size_t id){
 	this->liquidity -= loan;
 }
 
-void Bank::pay_loan(size_t id){
-	size_t amount = 0;
+void Bank::pay_loan(size_t id, size_t amount){
+	// size_t amount = 0;
 	
 	Account *account = (*this)[id];
 	if (account == NULL)
 		throw std::runtime_error("Account does not exist");
-	
+	if (amount > account->value)
+		throw std::runtime_error("You don't have that amount of money");
 	if (account->debt > 0){
 		if (account->value == 0){
 			drawSharkLoanerHeader();
@@ -80,11 +83,13 @@ void Bank::pay_loan(size_t id){
 		drawSharkHeader();
 		
 		if (account->debt >= account->value){
-			amount = account->value;
+			if (amount == 0)
+				amount = account->value;
 			account->debt -= amount;
 		}
 		else if (account->debt < account->value){
-			amount = account->debt;
+			if (amount == 0)
+				amount = account->debt;
 			account->debt -= amount;
 		}
 		this->liquidity += amount;
@@ -104,21 +109,23 @@ void Bank::pay_loan(size_t id){
 
 }
 
-void Bank::deposit_money(size_t id){
-	size_t money = 0;
-	drawDepositHeader();
-	money = drawDepositFooter();
+void Bank::deposit_money(size_t id, size_t money){
+	size_t fee = 0;
+	// drawDepositHeader();
+	// money = drawDepositFooter();
 	Account *account = (*this)[id];
 	if (account == NULL)
 		throw std::runtime_error("Account does not exist");
-	account->value += money * 0.95;
-	this->liquidity += money * 0.05;
+
+	fee = (money * 5) / 100;
+	account->value += money - fee;
+	this->liquidity += fee;
 }
 
-void Bank::withdraw_money(size_t id){
-	size_t money = 0;
-	drawWithdrawHeader();
-	money = drawWithdrawFooter();
+void Bank::withdraw_money(size_t id, size_t money){
+	// size_t money = 0;
+	// drawWithdrawHeader();
+	// money = drawWithdrawFooter();
 	Account *account = (*this)[id];
 	if (account == NULL)
 		throw std::runtime_error("Account does not exist");
@@ -133,8 +140,10 @@ void Bank::withdraw_money(size_t id){
 // TODO: Need to check and handle when receiving id 0 or highers than the ones that exist
 Bank::Account* Bank::operator[](size_t id){
 	std::map<size_t, Account>::iterator it = clientAccounts.find(id);
-	if (it == clientAccounts.end())
-		return NULL;
+	if (it == clientAccounts.end()){
+		clearScreen();
+		throw std::runtime_error("Account does not exist");
+	}
 	return &(it->second);
 }
 
@@ -143,18 +152,18 @@ Bank::Account* Bank::operator[](size_t id){
 // =====================================
 //				ACCOUNT
 
-size_t Bank::Account::get_id() const{
+const size_t& Bank::Account::get_id() const{
 	return id;
 }
 
-size_t Bank::Account::get_value() const{
+const size_t& Bank::Account::get_value() const{
 	return value;
 }
 
-size_t Bank::Account::get_debt() const{
+const size_t& Bank::Account::get_debt() const{
 	return debt;
 }
 
-size_t Bank::get_liquidity() const{
+const size_t& Bank::get_liquidity() const{
 	return liquidity;
 }

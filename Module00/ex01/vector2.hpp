@@ -21,8 +21,8 @@ class Vector2{
 	public:
 		Vector2(float x, float y);
 
-		float getX() const;
-		float getY() const;
+		const float& getX() const;
+		const float& getY() const;
 };
 
 #endif

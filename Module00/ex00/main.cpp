@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:16:55 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/16 17:44:47 by jodos-sa                                 */
+/*   Updated: 2026/09/21 18:54:02 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,47 +80,74 @@ int	main()
 		}
 		else
 		{
-			Bank::Account *account = bank[id];
-			if (account == NULL)
+			try
 			{
-				clearScreen();
-				std::cout << "Account ID not found.\n";
-				std::cout << "Press Enter to return to the main menu...";
+				Bank::Account *account = bank[id];
+				drawAccountHeader(account);
+				std::cout << "\n";
+
+				drawAccountBody(selected);
+
+				std::cout << "\n";
+				drawFooter();
+			}
+			catch (const std::exception& error)
+			{
+				std::cout << "Error: " << error.what() << std::endl;
+				std::cout << "Press Enter to continue...";
 				std::cin.ignore();
 				std::cin.get();
 				menu = 0;
 				selected = 0;
 				continue ;
 			}
+			// if (account == NULL)
+			// {
+			// 	clearScreen();
+			// 	std::cout << "Account ID not found.\n";
+			// 	std::cout << "Press Enter to return to the main menu...";
+			// 	std::cin.ignore();
+			// 	std::cin.get();
+			// 	menu = 0;
+			// 	selected = 0;
+			// 	continue ;
+			// }
 
-			drawAccountHeader(account);
-			std::cout << "\n";
-
-			drawAccountBody(selected);
-
-			std::cout << "\n";
-			drawFooter();
+// 			drawAccountHeader(account);
+// 			std::cout << "\n";
+// 
+// 			drawAccountBody(selected);
+// 
+// 			std::cout << "\n";
+// 			drawFooter();
 
 			std::cout << "\nSelect option: ";
 			readSelection(selected);
+			int amount = 0;
 
 			try
 			{
 				switch(selected){
 					case DEPOSIT:
-						bank.deposit_money(id);
+						drawDepositHeader();
+						amount = drawDepositFooter();
+						bank.deposit_money(id, amount);
 						selected = DEPOSIT;
 						break;
 					case WITHDRAW:
-						bank.withdraw_money(id);
+						drawWithdrawHeader();
+						amount = drawWithdrawFooter();
+						bank.withdraw_money(id, amount);
 						selected = WITHDRAW;
 						break;
 					case LOAN:
-						bank.give_loan(id);
+						drawLoanHeader();
+						amount = drawLoanFooter(&bank);
+						bank.give_loan(id, amount);
 						selected = LOAN;
 						break;
 					case PAY_LOAN:
-						bank.pay_loan(id);
+						bank.pay_loan(id, amount);
 						selected = PAY_LOAN;
 						break;
 					case DELETE:

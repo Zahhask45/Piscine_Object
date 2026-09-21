@@ -388,7 +388,7 @@ void generatePNG(const Graph& graph, const std::string& filename){
 		it != points.end(); ++it)
 	{
 		int centerX = margin + static_cast<int>(it->getX()) * scale;
-		int centerY = margin + (graph_width - 1 - static_cast<int>(it->getY())) * scale;
+		int centerY = margin + (graph_height - 1 - static_cast<int>(it->getY())) * scale;
 
 		int point_startX = centerX - point_size / 2;
 		int point_startY = centerY - point_size / 2;
