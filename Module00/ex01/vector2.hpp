@@ -6,7 +6,7 @@
 /*   By: jodos-sa <jodos-sa@student.42porto.com>             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/09/17 12:33:11 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/17 13:19:45 by jodos-sa                                 */
+/*   Updated: 2026/09/22 13:49:27 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ class Vector2{
 		float y;
 		
 	public:
+		Vector2();
 		Vector2(float x, float y);
 
 		const float& getX() const;

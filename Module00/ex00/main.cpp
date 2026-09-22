@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:16:55 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/21 18:54:02 by jodos-sa                                 */
+/*   Updated: 2026/09/22 14:30:40 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	main()
 		{
 			try
 			{
-				Bank::Account *account = bank[id];
+				Bank::Account &account = bank[id];
 				drawAccountHeader(account);
 				std::cout << "\n";
 

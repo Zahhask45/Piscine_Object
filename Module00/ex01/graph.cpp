@@ -6,7 +6,7 @@
 /*   By: jodos-sa <jodos-sa@student.42porto.com>             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/09/18 13:32:51 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/21 14:29:09 by jodos-sa                                 */
+/*   Updated: 2026/09/22 14:22:44 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,7 @@ void drawNumber(std::vector<std::vector<unsigned char> >& image,
 void generatePNG(const Graph& graph, const std::string& filename){
 	FILE *file = std::fopen(filename.c_str(), "wb");
 	if (!file)
-		return ;
+		throw std::runtime_error("Failed open/create file");
 
 	png_structp png = png_create_write_struct(
 		PNG_LIBPNG_VER_STRING,
@@ -239,14 +239,14 @@ void generatePNG(const Graph& graph, const std::string& filename){
 	);
 	if (!png){
 		std::fclose(file);
-		return ;
+		throw std::runtime_error("Failed to create PNG file");
 	}
 
 	png_infop info = png_create_info_struct(png);
 	if (!info){
 		png_destroy_write_struct(&png, NULL);
 		std::fclose(file);
-		return ;
+		throw std::runtime_error("Failed to create struct for PNG file");
 	}
 
 	png_init_io(png, file);

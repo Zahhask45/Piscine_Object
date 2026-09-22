@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/05/22 09:59:26 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/21 18:39:41 by jodos-sa                                 */
+/*   Updated: 2026/09/22 14:04:37 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef DIVIDEANDRULE_HPP
@@ -51,7 +51,8 @@ struct Bank {
 
 		const size_t& get_liquidity() const;
 		
-		Account* operator[](size_t id); // Can't use loops
+		Account& operator[](size_t id); // Can't use loops
+		const Account& operator[](size_t id) const; // Can't use loops
 };
 
 #endif

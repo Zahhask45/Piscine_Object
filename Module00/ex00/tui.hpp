@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/06/07 17:20:17 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/16 17:52:38 by jodos-sa                                 */
+/*   Updated: 2026/09/22 14:09:29 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef TUI_HPP
@@ -23,9 +23,9 @@ void	drawHeader();
 void	drawBody(int selected);
 void	drawLoginHeader();
 size_t	drawLoginFooter();
-void	drawAccountHeader(Bank::Account *account);
+void	drawAccountHeader(Bank::Account &account);
 void	drawAccountBody(int selected);
-void	drawNewAccountHeader(Bank::Account *account);
+void	drawNewAccountHeader(Bank::Account &account);
 void	drawFooter();
 void	drawDepositHeader();
 size_t 	drawDepositFooter();
@@ -40,5 +40,7 @@ void	drawSharkLoanerHeader();
 void 	drawSharkLoanerFooter(size_t amount);
 void	drawDonationHeader();
 void 	drawDonationFooter(size_t amount);
+void	drawDonationv2Header();
+void 	drawDonationv2Footer(size_t amount);
 
 #endif

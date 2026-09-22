@@ -6,7 +6,7 @@
 /*   By: jodos-sa <marvin@42.fr>                             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/06/07 17:17:19 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/16 17:55:13 by jodos-sa                                 */
+/*   Updated: 2026/09/22 14:09:38 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void drawHeader()
 	std::cout << "└──────────────────────────────────────┘\n";
 }
 
-void drawAccountHeader(Bank::Account *account)
+void drawAccountHeader(Bank::Account &account)
 {
 	
 	std::cout << "┌──────────────────────────────────────┐\n";
@@ -84,17 +84,17 @@ void drawAccountHeader(Bank::Account *account)
 	std::cout << "├──────────────────────────────────────┤\n";
 	
 	std::ostringstream line1;
-	line1 << "ID: " << account->get_id();
+	line1 << "ID: " << account.get_id();
 
 	std::cout << "│ " << std::left << std::setw(WIDTH) << line1.str() << " │\n";
 
 	std::ostringstream line2;
-	line2 << "BALANCE: " << account->get_value();
+	line2 << "BALANCE: " << account.get_value();
 
 	std::cout << "│ " << std::left << std::setw(WIDTH) << line2.str() << " │\n";
 
 	std::ostringstream line3;
-	line3 << "DEBT: " << account->get_debt();
+	line3 << "DEBT: " << account.get_debt();
 
 	std::cout << "│ " << std::left << std::setw(WIDTH) << line3.str() << " │\n";
 	std::cout << "└──────────────────────────────────────┘\n";
@@ -126,7 +126,7 @@ void drawFooter()
 	std::cout << "Use numbers to navigate | 0 = exit\n";
 }
 
-void drawNewAccountHeader(Bank::Account *account)
+void drawNewAccountHeader(Bank::Account &account)
 {
 	clearScreen();
 	
@@ -135,7 +135,7 @@ void drawNewAccountHeader(Bank::Account *account)
 	std::cout << "├──────────────────────────────────────┤\n";
 	std::cout << "│      HOORAY NEW ACCOUNT CREATED      │\n";
 	std::ostringstream line1;
-	line1 << "ID: " << account->get_id();
+	line1 << "ID: " << account.get_id();
 
 	std::cout << "│ " << std::left << std::setw(WIDTH) << line1.str() << " │\n";
 	std::cout << "└──────────────────────────────────────┘\n";
@@ -311,5 +311,26 @@ void drawDonationFooter(size_t amount)
 {
 	
 	std::cout << "\nAmount Added: " << amount;
+	std::cout << "\n────────────────────────────────────────\n";
+}
+
+void drawDonationv2Header()
+{
+	clearScreen();
+	
+	std::cout << "┌──────────────────────────────────────┐\n";
+	std::cout << "│             SHARK BANANA             │\n";
+	std::cout << "├──────────────────────────────────────┤\n";
+	std::cout << "│        THANK YOU FOR THE EXTRA       │\n";
+	std::cout << "│                MONEY                 │\n";
+	std::cout << "└──────────────────────────────────────┘\n";
+}
+
+
+
+void drawDonationv2Footer(size_t amount)
+{
+	
+	std::cout << "\nAmount Donated to the Bank: " << amount;
 	std::cout << "\n────────────────────────────────────────\n";
 }

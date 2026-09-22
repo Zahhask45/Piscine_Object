@@ -6,7 +6,7 @@
 /*   By: jodos-sa <jodos-sa@student.42porto.com>             _\'--','`|       */
 /*                                                           \`---`  /        */
 /*   Created: 2026/09/17 16:52:07 by jodos-sa                 `----'`         */
-/*   Updated: 2026/09/21 14:41:15 by jodos-sa                                 */
+/*   Updated: 2026/09/22 14:01:32 by jodos-sa                                 */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,20 @@ void clearScreen()
 #endif
 }
 
-int	main()
+int	main(int argc, char **argv)
 {
+	if (argc > 2)
+		return 1;
 	Graph graph(Vector2(20.0f, 20.0f));
 
 	try{
-		graph.loadPoints("points.txt");
+		if (argc == 2){
+			std::string filename = argv[1];	
+			graph.loadPoints(filename);
+		}
 		graph.addPoint(Vector2(8.0f, 8.0f));
+		graph.addPoint(Vector2(5.0f, 19.0f));
+		graph.addPoint(Vector2(1.0f, 10.0f));
 		graph.display();
 		generatePNG(graph, "graph.png");
 		std::cout << "Graph saved to graph.png" << std::endl;
